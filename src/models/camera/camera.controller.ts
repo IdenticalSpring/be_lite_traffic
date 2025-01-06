@@ -1,8 +1,10 @@
 import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
 import { CameraService } from './camera.service';
 import { Camera } from './entity/camera.entity';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('cameras')
+@ApiBearerAuth('JWT')
 export class CameraController {
     constructor(private readonly cameraService: CameraService) { }
 
