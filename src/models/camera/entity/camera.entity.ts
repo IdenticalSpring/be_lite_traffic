@@ -8,10 +8,11 @@ export class Camera {
     @Column({ length: 100 })
     name: string;
 
-    @Column({ length: 100 })
+    @Column({ type: 'text' })
     cameraURL: string;
-    @Column({ length: 100 })
+    @Column({ type: 'text' })
     cameraImageURL: string;
+
 
     @CreateDateColumn()
     createdAt: Date;
