@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Camera } from './entity/camera.entity';
-
+import { CreateCameraDto } from './dto/create_camera.dto';
+import { UpdateCameraDto } from './dto/update_camera.dto';
 
 @Injectable()
 export class CameraService {
@@ -19,13 +20,13 @@ export class CameraService {
         return this.cameraRepository.findOneBy({ id });
     }
 
-    create(camera: Partial<Camera>): Promise<Camera> {
-        const newCamera = this.cameraRepository.create(camera);
+    create(createCameraDto: CreateCameraDto): Promise<Camera> {
+        const newCamera = this.cameraRepository.create(createCameraDto);
         return this.cameraRepository.save(newCamera);
     }
 
-    async update(id: number, camera: Partial<Camera>): Promise<Camera> {
-        await this.cameraRepository.update(id, camera);
+    async update(id: number, updateCameraDto: UpdateCameraDto): Promise<Camera> {
+        await this.cameraRepository.update(id, updateCameraDto);
         return this.cameraRepository.findOneBy({ id });
     }
 

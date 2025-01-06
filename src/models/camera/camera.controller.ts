@@ -1,10 +1,13 @@
 import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
 import { CameraService } from './camera.service';
 import { Camera } from './entity/camera.entity';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { CreateCameraDto } from './dto/create_camera.dto';
+import { UpdateCameraDto } from './dto/update_camera.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-@Controller('cameras')
+@ApiTags('Cameras')
 @ApiBearerAuth('JWT')
+@Controller('cameras')
 export class CameraController {
     constructor(private readonly cameraService: CameraService) { }
 
@@ -19,13 +22,16 @@ export class CameraController {
     }
 
     @Post()
-    create(@Body() camera: Partial<Camera>): Promise<Camera> {
-        return this.cameraService.create(camera);
+    create(@Body() createCameraDto: CreateCameraDto): Promise<Camera> {
+        return this.cameraService.create(createCameraDto);
     }
 
     @Put(':id')
-    update(@Param('id') id: number, @Body() camera: Partial<Camera>): Promise<Camera> {
-        return this.cameraService.update(id, camera);
+    update(
+        @Param('id') id: number,
+        @Body() updateCameraDto: UpdateCameraDto,
+    ): Promise<Camera> {
+        return this.cameraService.update(id, updateCameraDto);
     }
 
     @Delete(':id')
