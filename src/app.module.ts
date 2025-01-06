@@ -8,6 +8,8 @@ import { AdminUserModule } from './admin/user/user.module'
 import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Camera } from './models/camera/entity/camera.entity';
+import { CameraModule } from './models/camera/camera.module';
 
 @Module({
   imports: [
@@ -23,6 +25,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       database: process.env.DATABASE_NAME,
       entities: [
         User,
+        Camera,
       ],
       synchronize: true,
     }),
@@ -34,6 +37,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
     AuthModule,
     UserModule,
+    CameraModule,
     // Wedding template
    
     // Cloudinary
