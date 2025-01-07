@@ -1,44 +1,26 @@
-import { IsString, IsEmail, IsOptional, IsEnum, IsBoolean, IsDate } from 'class-validator';
+import { IsString, IsEmail, IsOptional, IsEnum, IsBoolean, IsDate, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { UserRole } from '../entity/user.entity';
 
 export class CreateUserDto {
-    @IsString()
-    @ApiProperty({ description: 'The name of the user' })
+    @ApiProperty({ description: 'User name', example: 'John Doe' })
+    @IsNotEmpty()
     name: string;
 
+    @ApiProperty({ description: 'User phone number', example: '123456789' })
+    @IsOptional()
+    phone: string;
+
+    @ApiProperty({ description: 'User address', example: '123 Main Street' })
+    @IsOptional()
+    address: string;
+
+    @ApiProperty({ description: 'User email', example: 'johndoe@example.com' })
+    @IsNotEmpty()
     @IsEmail()
-    @ApiProperty({ description: 'The email of the user' })
     email: string;
 
-    @IsString()
-    @ApiProperty({ description: 'The password of the user' })
+    @ApiProperty({ description: 'User password', example: 'password123' })
+    @IsNotEmpty()
     password: string;
-
-    @IsOptional()
-    @IsString()
-    @ApiProperty({ description: 'The phone number of the user', required: false })
-    phone?: string;
-
-    @IsOptional()
-    @IsBoolean()
-    @ApiProperty({ description: 'Indicates whether the user is active', required: false })
-    isActive?: boolean;
-
-    @IsOptional()
-    @IsDate()
-    @ApiProperty({ description: 'The date of birth of the user', required: false })
-    dateOfBirth?: Date;
-
-    @IsOptional()
-    @IsEnum(UserRole)
-    @ApiProperty({ description: 'The role of the user', enum: UserRole, required: false })
-    role?: UserRole;
-
-    @ApiProperty({ description: 'The avatar of the user', type: 'string', format: 'binary', required: false })
-    @IsOptional()
-    avatar?: string;
-    @ApiProperty({ description: 'The phone number of the user', required: false })
-    @IsOptional()
-    address?: string;
 }
