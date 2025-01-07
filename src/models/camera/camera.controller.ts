@@ -21,21 +21,5 @@ export class CameraController {
         return this.cameraService.findOne(id);
     }
 
-    @Post()
-    create(@Body() createCameraDto: CreateCameraDto): Promise<Camera> {
-        return this.cameraService.create(createCameraDto);
-    }
-
-    @Put(':id')
-    update(
-        @Param('id') id: number,
-        @Body() updateCameraDto: UpdateCameraDto,
-    ): Promise<Camera> {
-        return this.cameraService.update(id, updateCameraDto);
-    }
-
-    @Delete(':id')
-    remove(@Param('id') id: number): Promise<void> {
-        return this.cameraService.remove(id);
-    }
+    
 }

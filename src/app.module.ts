@@ -10,6 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Camera } from './models/camera/entity/camera.entity';
 import { CameraModule } from './models/camera/camera.module';
+import { CameraAdminModule } from './admin/camera/camera.module';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { CameraModule } from './models/camera/camera.module';
 
     //Module Admin
     AdminUserModule,
+    CameraAdminModule,
 
   ],
   providers: [
