@@ -24,7 +24,5 @@ export class UpdateUserDto {
      @IsEmail()
      email: string;
  
-     @ApiProperty({ description: 'User password', example: 'password123' })
-     @IsNotEmpty()
-     password: string;
+  
 }

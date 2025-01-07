@@ -12,6 +12,7 @@ import {
   NotFoundException,
   UseGuards,
   BadRequestException,
+  Logger,
 } from '@nestjs/common';
 import { UserService } from 'src/models/user/user.service'; 
 import { UpdateUserDto } from 'src/models/user/dto/update-user.dto'; 
@@ -38,6 +39,7 @@ import { CreateUserDto } from 'src/models/user/dto/create-user.dto';
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles('admin')
 export class AdminUserController {
+  private readonly logger = new Logger(UserService.name);
   constructor(private readonly userService: UserService) {}
 
   @Get(':id')
@@ -124,7 +126,13 @@ export class AdminUserController {
   @ApiResponse({ status: 200, description: 'User deleted successfully' })
   @ApiResponse({ status: 404, description: 'User not found' })
   async remove(@Param('id') id: number): Promise<{ message: string }> {
-    await this.userService.remove(id);
-    return { message: 'User deleted successfully' };
+    try {
+      await this.userService.remove(id);
+      return { message: 'User deleted successfully' };
+    } catch (error) {
+      this.logger.error('Error deleting user:', error.message);
+      throw error;
+    }
   }
+
 }

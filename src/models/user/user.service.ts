@@ -78,8 +78,7 @@ export class UserService {
 
   async findOne(condition: Partial<User>): Promise<User | null> {
     return this.userRepository.findOne({
-      // where: condition,
-      // // relations: ['orders'],
+      where: condition, // Thêm điều kiện truy vấn
     });
   }
 
