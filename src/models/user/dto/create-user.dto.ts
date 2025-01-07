@@ -34,7 +34,7 @@ export class CreateUserDto {
     @IsEnum(UserRole)
     role: UserRole;
 
-    @ApiProperty({ description: 'Is user active?', example: true })
+    @ApiProperty({ description: 'Is user active?', example: 1 })
     @IsOptional()
     @IsBoolean()
     isActive: boolean;

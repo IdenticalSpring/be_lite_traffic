@@ -99,23 +99,24 @@ export class UserService {
 
     user.name = data.name || user.name;
     user.email = data.email || user.email;
-    // user.phone = data.phone || user.phone;
-    // user.isActive = data.isActive ?? user.isActive;
-    // user.role = data.role || user.role;
+    user.phone = data.phone || user.phone;
+    user.isActive = data.isActive ?? user.isActive; // Cập nhật isActive
+    user.role = data.role || user.role; // Cập nhật role
 
-    // if (data.dateOfBirth) {
-    //   user.dateOfBirth = new Date(data.dateOfBirth);
-    // }
+    if (data.dateOfBirth) {
+      user.dateOfBirth = new Date(data.dateOfBirth);
+    }
 
     // Nếu có ảnh avatar, upload lên Cloudinary
     if (avatarFile) {
-      user.avatar = await this.uploadAvatarToCloud(avatarFile); 
+      user.avatar = await this.uploadAvatarToCloud(avatarFile);
     }
 
-    await this.userRepository.save(user); 
+    await this.userRepository.save(user);
 
-    return this.mapToUserResponseDto(user); 
+    return this.mapToUserResponseDto(user);
   }
+
 
   async uploadAvatarToCloud(avatarFile: Express.Multer.File): Promise<string> {
     return new Promise((resolve, reject) => {
