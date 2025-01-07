@@ -1,4 +1,4 @@
-import { IsString, IsEmail, IsOptional, IsEnum, IsBoolean, IsDate, IsNotEmpty } from 'class-validator';
+import { IsString, IsEmail, IsOptional, IsEnum, IsBoolean, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { UserRole } from '../entity/user.entity';
 
@@ -23,4 +23,19 @@ export class CreateUserDto {
     @ApiProperty({ description: 'User password', example: 'password123' })
     @IsNotEmpty()
     password: string;
+
+    @ApiProperty({
+        description: 'User role',
+        example: UserRole.USER,
+        enum: UserRole,
+        default: UserRole.USER,
+    })
+    @IsOptional()
+    @IsEnum(UserRole)
+    role: UserRole;
+
+    @ApiProperty({ description: 'Is user active?', example: true })
+    @IsOptional()
+    @IsBoolean()
+    isActive: boolean;
 }
