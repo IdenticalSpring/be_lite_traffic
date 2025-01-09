@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsNotEmpty, IsOptional } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional, IsNumber } from 'class-validator';
 
 export class CreateCameraDto {
     @ApiProperty({ description: 'Name of the camera', example: 'Camera 01' })
@@ -16,4 +16,13 @@ export class CreateCameraDto {
     @IsString()
     @IsNotEmpty()
     cameraImageURL: string;
+    @ApiProperty({ description: 'Latitude of the camera', example: 10.85639487526698 })
+    @IsNumber()
+    @IsNotEmpty()
+    latitude: number;
+
+    @ApiProperty({ description: 'Longitude of the camera', example: 106.78582862937027 })
+    @IsNumber()
+    @IsNotEmpty()
+    longitude: number;
 }

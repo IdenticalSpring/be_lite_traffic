@@ -12,7 +12,11 @@ export class Camera {
     cameraURL: string;
     @Column({ type: 'text' })
     cameraImageURL: string;
+    @Column('double precision') 
+    latitude: number;
 
+    @Column('double precision') 
+    longitude: number;
 
     @CreateDateColumn()
     createdAt: Date;
